@@ -54,7 +54,7 @@ function _getLocalVersion(){
 }
 
 function _getRemoteVersion(){
-        wget -O - $urlResticReleases 2>/dev/null | grep "href.*rest-server_.*_linux_arm64.tar.gz" | cut -f 2 -d '_'
+        wget -O - $urlResticReleases 2>/dev/null | grep "href.*rest-server_.*_linux_386.tar.gz" | cut -f 2 -d '_'
 }
 
 # ------------------------------------------------------------
@@ -66,7 +66,7 @@ echo "========== INSTALL RESTIC SERVER =========="
 echo
 cd $( dirname $0 ) || _quit "cannot change directory ..."
 
-uname -m | grep "arch64" >/dev/null || _quit "Sorry installer is for arch64 Synolgy NAS"
+uname -m | grep "i686" >/dev/null || _quit "Sorry installer is for i686 Synolgy NAS"
 
 localversion=$( _getLocalVersion )
 echo local version : $localversion
@@ -77,9 +77,9 @@ echo $resticVersion
 test -z "$resticVersion" && _quit "Unable to detect remote version from $urlResticReleases"
 
 test "$remoteVersion" = "$localversion" && echo "equal"
-urlRestic=https://github.com/restic/rest-server/releases/download/v${resticVersion}/rest-server_${resticVersion}_linux_arm64.tar.gz
+urlRestic=https://github.com/restic/rest-server/releases/download/v${resticVersion}/rest-server_${resticVersion}_linux_386.tar.gz
 dlFile=$( basename $urlRestic )
-resticDir=rest-server_${resticVersion}_linux_arm64
+resticDir=rest-server_${resticVersion}_linux_386
 
 
 _h2 "Download"
